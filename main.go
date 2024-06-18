@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -68,8 +69,9 @@ func getUserAttack() int {
 			continue
 		}
 		fmt.Println("Количество очков твоей атаки:", attackValue)
-		total += 1
+		total += attackValue
 	}
+
 	return total
 }
 
@@ -84,7 +86,9 @@ func runGame() bool {
 		fmt.Println("В этот раз не повезло :( Бой проигран.")
 	}
 	answer := input("Чтобы сыграть ещё раз, введи букву [y] или [Y]: ")
-	return answer == "Y"
+	answer = strings.ToLower(answer)
+	fmt.Println(answer)
+	return answer == "y"
 }
 
 func main() {
@@ -105,6 +109,9 @@ hard — урон от 30 до 40 очков.
 `
 	fmt.Println(intro)
 
-	for runGame() {
+	game := runGame()
+
+	for game {
+		game = runGame()
 	}
 }
